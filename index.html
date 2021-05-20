@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #content {
+      width: 100vw;
+      height: 100vh;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="songarea">
+    Paste Song
+    <textarea id="songtext"></textarea>
+    <button id="done">Done</button>
+  </div>
+
+  <div id="content">
+  </div>
+
+  <script>
+    let line = 0;
+    let song = "";
+    let contentDiv = document.getElementById("content");
+    document.getElementById("songarea").style.display = "none";
+
+    window.addEventListener("keydown", (ev) => {
+      if (ev.key === 'a') {
+        document.getElementById("songarea").style.display = "table-cell";
+      } else if (ev.key === 'ArrowRight') {
+        line += 1;
+        contentDiv.innerText = song.split("\n")[line] || "";
+      } else if (ev.key === 'ArrowLeft') {
+        line -= 1;
+        contentDiv.innerText = song.split("\n")[line] || "";
+      }
+    })
+
+
+    document.getElementById("done").addEventListener("click", (ev) => {
+      song = document.getElementById("songtext").value;
+      console.log("Set to", song);
+      document.getElementById("songarea").style.display = "none";
+      contentDiv.innerText = song.split("\n")[line] || "";
+
+    })
+
+  </script>
+
+
+
+</body>
+
+</html>
